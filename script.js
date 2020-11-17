@@ -1,49 +1,38 @@
 window.onload = function(event){
     
     let start = true;
-    let pintar;
+    let pintar ="black";
     generateBoard();
     generatorClick();
 
     let botao = document.getElementById("clear-board");
     botao.addEventListener("click", clear);
 
-    let pintarPreto = document.getElementById("black")
-    pintarPreto.addEventListener("click", function(){ 
-        pintar = "black";
-        removeClass();
-        pintarPreto.className += " selected";
-    })
-    
+    let pintarPreto = document.getElementById("black");
+    pintarPreto.className += " selected";
+    pintarPreto.addEventListener("click", getColor);
+
     let pintarA = document.getElementById("colorA");
     let corA = getRandomColor();
     pintarA.style.backgroundColor = corA; 
-    pintarA.addEventListener("click", function(){ 
-        pintar = corA;
-        removeClass();
-        pintarA.className += " selected";
-    })
+    pintarA.addEventListener("click", getColor);
 
     let pintarB = document.getElementById("colorB");
     let corB = getRandomColor();
     pintarB.style.backgroundColor = corB;
-    pintarB.addEventListener("click", function(){ 
-        pintar = corB;
-        removeClass();
-        pintarB.className += " selected";
-    })
+    pintarB.addEventListener("click", getColor);
 
     let pintarC = document.getElementById("colorC");
     let corC = getRandomColor();
     pintarC.style.backgroundColor = corC;
-    pintarC.addEventListener("click", function(){ 
-        pintar = corC;
-        removeClass();
-        pintarC.className += " selected";
-    })
+    pintarC.addEventListener("click", getColor);
 
-    pintar = "black";
-    pintarPreto.className += " selected";
+    //Evento para pegar a cor da paleta selecionada
+    function getColor(event){
+        pintar = event.target.style.backgroundColor;
+        removeClass();
+        event.target.classList.add("selected");
+    }
 
     //Evento do click do pixel no quadro
     function pintaBox(){
